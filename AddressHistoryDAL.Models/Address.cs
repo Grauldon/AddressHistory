@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace AddressHistoryDAL.Models
@@ -6,10 +6,10 @@ namespace AddressHistoryDAL.Models
     public class Address
     {
         [DataType(DataType.Date)]
-        public string StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
-        public string EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [StringLength(50)]
         public string Address1 { get; set; }
@@ -28,10 +28,5 @@ namespace AddressHistoryDAL.Models
 
         [StringLength(4)]
         public string Zip4 { get; set; }
-
-        public List<Address> GetAddresses()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
