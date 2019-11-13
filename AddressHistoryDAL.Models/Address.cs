@@ -5,9 +5,11 @@ namespace AddressHistoryDAL.Models
 {
     public class Address
     {
+        [Key]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
+        [Key]
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
