@@ -52,7 +52,7 @@ namespace AddressHistoryDAL
         public List<T> GetAddresses(DateTime date)
         {
             var address = from a in _table
-                          where date >= a.StartDate
+                          where date <= a.EndDate
                           orderby a.StartDate
                           select a;
             return address.ToList();
