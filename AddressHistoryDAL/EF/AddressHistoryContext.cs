@@ -27,14 +27,5 @@ namespace AddressHistoryDAL.EF
                     .ConfigureWarnings(warnings=>warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
             }
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //create the multi column index
-            modelBuilder.Entity<Address>(entity =>
-            {
-                entity.HasKey(e => new { e.StartDate, e.EndDate });
-            });
-        }
     }
 }
