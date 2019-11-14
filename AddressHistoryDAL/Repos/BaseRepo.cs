@@ -7,16 +7,16 @@ using Microsoft.EntityFrameworkCore.Storage;
 using AddressHistoryDAL.EF;
 using AddressHistoryDAL.Models;
 
-namespace AddressHistoryDAL
+namespace AddressHistoryDAL.Repos
 {
-    public class DataRepo<T> : IDisposable, IRepo<T> where T : Address, new()
+    public class BaseRepo<T> : IDisposable, IRepo<T> where T : Address, new()
     {
         private readonly DbSet<T> _table;
         private readonly AddressHistoryContext _db;
         protected AddressHistoryContext Context => _db;
 
-        public DataRepo() : this(new AddressHistoryContext()) {}
-        public DataRepo(AddressHistoryContext context)
+        public BaseRepo() : this(new AddressHistoryContext()) { }
+        public BaseRepo(AddressHistoryContext context)
         {
             _db = context;
             _table = _db.Set<T>();
@@ -56,6 +56,14 @@ namespace AddressHistoryDAL
                           orderby a.StartDate
                           select a;
             return address.ToList();
+        }
+
+        public T GetLastAddress()
+        {
+            var address = from a in _table
+                          where a.EndDate == DateTime.Parse("9999-12-31")
+                          select a;
+            return address.Single();
         }
 
         public int Update(T addr)
