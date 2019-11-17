@@ -5,7 +5,7 @@ namespace AddressHistoryDAL.Repos
 {
     public interface IDataRepo : IRepo<Address>
     {
-        int InsertAddress();
+        int InsertAddress(Address addr);
         int DeleteAddress();
         int UpdateAddress(Address addr, FieldType field, string value);
     }

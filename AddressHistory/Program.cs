@@ -14,9 +14,9 @@ namespace AddressHistory
             //RetrieveList();
             //RetrieveListByDate();
             //RetrieveOneByDate();
-            //InsertAddress();
+            InsertAddress();
             //DeleteAddress();
-            UpdateAddress();
+            //UpdateAddress();
         }
 
         static void RetrieveList()
@@ -70,7 +70,17 @@ namespace AddressHistory
         static void InsertAddress()
         {
             DataRepo data = new DataRepo();
-            int response = data.InsertAddress();
+            Address addr = new Address()
+            {
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Parse("9999-12-31"),
+                Address1 = "123 Somewhere Ave",
+                City = "Nowhere",
+                State = "AS",
+                Zip5 = "12345"
+            };
+
+            int response = data.InsertAddress(addr);
             Console.WriteLine($"Return code: {response}");
         }
 

@@ -26,26 +26,19 @@ namespace AddressHistoryDAL.Repos
             return response;
         }
 
-        public int InsertAddress()
+        public int InsertAddress(Address addr)
         {
             int response = 0;
 
+            // Ensure the new start date does not already exist on the table
+
             response = TerminateAddress();
 
-            if (response == 0)
+            if (response == 1)
             {
-                Address addr = new Address()
-                {
-                    StartDate = DateTime.Today,
-                    EndDate = DateTime.Parse("9999-12-31"),
-                    Address1 = "123 Somewhere Ave",
-                    City = "Nowhere",
-                    State = "AS",
-                    Zip5 = "12345"
-                };
-
                 response = Add(addr);
             }
+            // Add an else clause to catch when no records are updated or when more than one records are updated. The application should only update one record at a time.
 
             return response;
         }
@@ -73,7 +66,10 @@ namespace AddressHistoryDAL.Repos
                     addr.City = value;
                     break;
                 case FieldType.STATE:
-                    addr.State = value;
+                    if (value.Length == 2)
+                    {
+                        addr.State = value;
+                    }
                     break;
                 case FieldType.ZIP5:
                     addr.Zip5 = value;
@@ -85,7 +81,10 @@ namespace AddressHistoryDAL.Repos
                     throw new Exception("Invalid field type.");
             }
 
-            response = Update(addr);
+            if (response == 0)
+            {
+                response = Update(addr);
+            }
 
             return response; 
         }
