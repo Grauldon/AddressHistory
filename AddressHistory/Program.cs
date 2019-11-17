@@ -72,8 +72,6 @@ namespace AddressHistory
             DataRepo data = new DataRepo();
             Address addr = new Address()
             {
-                StartDate = DateTime.Today,
-                EndDate = DateTime.Parse("9999-12-31"),
                 Address1 = "123 Somewhere Ave",
                 City = "Nowhere",
                 State = "AS",

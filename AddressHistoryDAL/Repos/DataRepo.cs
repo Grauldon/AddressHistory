@@ -29,16 +29,30 @@ namespace AddressHistoryDAL.Repos
         public int InsertAddress(Address addr)
         {
             int response = 0;
+            DateTime today = DateTime.Today;
 
-            // Ensure the new start date does not already exist on the table
+            Address terminateAddress = new Address();
+            terminateAddress = GetLastAddress();
 
-            response = TerminateAddress();
-
-            if (response == 1)
+            if (terminateAddress.StartDate == today)
             {
-                response = Add(addr);
+                // add error catching
+                return -100;
             }
-            // Add an else clause to catch when no records are updated or when more than one records are updated. The application should only update one record at a time.
+            else
+            {
+                terminateAddress.EndDate = DateTime.Now.AddDays(-1);
+
+                response = Update(terminateAddress);
+
+                if (response == 1)
+                {
+                    addr.StartDate = today;
+                    addr.EndDate = DateTime.Parse("9999-12-31");
+                    response = Add(addr);
+                }
+                // Add an else clause to catch when no records are updated or when more than one records are updated. The application should only update one record at a time.
+            }
 
             return response;
         }
@@ -87,19 +101,6 @@ namespace AddressHistoryDAL.Repos
             }
 
             return response; 
-        }
-
-        private int TerminateAddress()
-        {
-            int response = 0;
-
-            Address addr = new Address();
-            addr = GetLastAddress();
-            addr.EndDate = DateTime.Now.AddDays(-1);
-
-            response = Update(addr);
-
-            return response;
         }
     }
 }
