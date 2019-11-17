@@ -63,22 +63,16 @@ namespace AddressHistoryDAL
             Console.WriteLine("***** Exception *****");
             Console.WriteLine($"{ex.Message}");
 
-            if (ex.Source.Equals("AddressHistory"))
-            {
-                Console.WriteLine($"Source:\t\t{ex.Source}");
-                Console.WriteLine($"Class:\t\t{ex.TargetSite.DeclaringType}");
-                Console.WriteLine($"Member name:\t{ex.TargetSite}");
-                Console.WriteLine($"Member type:\t{ex.TargetSite.MemberType}");
+            Console.WriteLine($"Source:\t\t{ex.Source}");
+            Console.WriteLine($"Class:\t\t{ex.TargetSite.DeclaringType}");
+            Console.WriteLine($"Member name:\t{ex.TargetSite}");
+            Console.WriteLine($"Member type:\t{ex.TargetSite.MemberType}");
 
-                foreach (DictionaryEntry item in ex.Data)
-                {
-                    Console.WriteLine($"\t\t{item.Key} {item.Value} ");
-                }
-            }
-            else
+            foreach (DictionaryEntry item in ex.Data)
             {
-                Console.WriteLine($"Source: {ex.Source}");
+                Console.WriteLine($"\t\t{item.Key} {item.Value} ");
             }
+
             Console.WriteLine($"\nStackTrace:\n{ex.StackTrace}\n");
         }
 
@@ -98,23 +92,16 @@ namespace AddressHistoryDAL
             {
                 logFile.WriteLine("***** Exception *****");
                 logFile.WriteLine($"{DateTime.Now} {ex.Message}");
+                logFile.WriteLine($"Source:\t\t{ex.Source}");
+                logFile.WriteLine($"Class:\t\t{ex.TargetSite.DeclaringType}");
+                logFile.WriteLine($"Member name:\t{ex.TargetSite}");
+                logFile.WriteLine($"Member type:\t{ex.TargetSite.MemberType}");
 
-                if (ex.Source.Equals("AddressHistory"))
+                foreach (DictionaryEntry item in ex.Data)
                 {
-                    logFile.WriteLine($"Source:\t\t{ex.Source}");
-                    logFile.WriteLine($"Class:\t\t{ex.TargetSite.DeclaringType}");
-                    logFile.WriteLine($"Member name:\t{ex.TargetSite}");
-                    logFile.WriteLine($"Member type:\t{ex.TargetSite.MemberType}");
+                    logFile.WriteLine($"\t\t{item.Key} {item.Value} ");
+                }
 
-                    foreach (DictionaryEntry item in ex.Data)
-                    {
-                        logFile.WriteLine($"\t\t{item.Key} {item.Value} ");
-                    }
-                }
-                else
-                {
-                    logFile.WriteLine($"Source: {ex.Source}");
-                }
                 logFile.WriteLine($"\nStackTrace:\n{ex.StackTrace}\n");
             }
         }
