@@ -14,9 +14,9 @@ namespace AddressHistory
             //RetrieveList();
             //RetrieveListByDate();
             //RetrieveOneByDate();
-            InsertAddress();
+            //InsertAddress();
             //DeleteAddress();
-            //UpdateAddress();
+            UpdateAddress();
         }
 
         static void RetrieveList()
@@ -93,10 +93,13 @@ namespace AddressHistory
         {
             DataRepo data = new DataRepo();
             Address addr = new Address();
-            DateTime date = new DateTime(2005, 12, 01);
+            DateTime date = new DateTime(2019, 11, 18);
 
-            addr = data.GetAddress(date);
-            int response = data.UpdateAddress(addr, FieldType.ADDRESS2, null);
+            string temp = new string('a', 20);
+
+            //addr = data.GetAddress(date);
+            addr = data.GetLastAddress();
+            int response = data.UpdateAddress(addr, FieldType.ZIP4, null);
             Console.WriteLine($"Response: {response}");
         }
     }
