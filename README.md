@@ -12,5 +12,5 @@ requested.
 
 * Frontend
 
-  ASP.NET Core MVC 2.2.5
+  ASP.NET Core MVC 2.2.0
 
