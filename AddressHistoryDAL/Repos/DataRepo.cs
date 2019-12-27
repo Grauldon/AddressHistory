@@ -41,6 +41,8 @@ namespace AddressHistoryDAL.Repos
             {
                 InputOutput logger = InputOutput.GetInstance();
 
+                ex.Data.Add("Class:", "DataRepo");
+                ex.Data.Add("Method:", "DeleteAddress()");
                 ex.Data.Add("StartDate:", addr.StartDate);
                 ex.Data.Add("EndDate:", addr.EndDate);
                 ex.Data.Add("Address:", addr.Address1);
@@ -93,6 +95,8 @@ namespace AddressHistoryDAL.Repos
             {
                 InputOutput logger = InputOutput.GetInstance();
 
+                ex.Data.Add("Class:", "DataRepo");
+                ex.Data.Add("Method:", "InsertAddress(Address addr)");
                 ex.Data.Add("StartDate:", addr.StartDate);
                 ex.Data.Add("EndDate:", addr.EndDate);
                 ex.Data.Add("Address:", addr.Address1);
@@ -191,6 +195,8 @@ namespace AddressHistoryDAL.Repos
             {
                 InputOutput logger = InputOutput.GetInstance();
 
+                ex.Data.Add("Class:", "DataRepo");
+                ex.Data.Add("Method:", "UpdateAddress(Address addr, FieldType field, string value)");
                 ex.Data.Add("StartDate:", addr.StartDate);
                 ex.Data.Add("EndDate:", addr.EndDate);
                 ex.Data.Add("Address:", addr.Address1);
