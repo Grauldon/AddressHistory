@@ -7,6 +7,7 @@ namespace AddressHistoryDAL.Repos
     {
         int InsertAddress(Address addr);
         int DeleteAddress();
+        int UpdateAddress(Address addr);
         int UpdateAddress(Address addr, FieldType field, string value);
     }
 }

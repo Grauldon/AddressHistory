@@ -107,6 +107,36 @@ namespace AddressHistoryDAL.Repos
             return response;
         }
 
+        public int UpdateAddress(Address addr)
+        {
+            int response = 0;
+
+            try
+            {
+                response = Update(addr);
+
+                if (response != 1)
+                {
+                    throw new Exception("Update operation affected other than one row.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                InputOutput logger = InputOutput.GetInstance();
+
+                ex.Data.Add("Class:", "DataRepo");
+                ex.Data.Add("Method:", "UpdateAddress(Address addr)");
+                ex.Data.Add("StartDate:", addr.StartDate);
+                ex.Data.Add("EndDate:", addr.EndDate);
+                ex.Data.Add("Address:", addr.Address1);
+
+                logger.WriteLogFile(ex);
+            }
+
+            return response; 
+        }
+
         public int UpdateAddress(Address addr, FieldType field, string value)
         {
             int response = 0;
