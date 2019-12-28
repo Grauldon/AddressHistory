@@ -1,0 +1,98 @@
+﻿@model AddressHistoryDAL.Models.Address
+
+@{
+    ViewData["Title"] = "Single Address";
+}
+
+@functions {
+
+private string DisplayZip(string zip5, string zip4)
+{
+    if (string.IsNullOrEmpty(zip4))
+    {
+        return zip5;
+    }
+
+    return zip5 + "-" + zip4;
+}
+
+private string DisplayEndDate(string date)
+{
+    if (date.Equals("12/31/9999"))
+    {
+        return string.Empty;
+    }
+
+    return date;
+}
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    Zip Code
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.StartDate)
+                </td>
+                <td>
+                    @DisplayEndDate(Model.EndDate.ToString("MM/dd/yyyy"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.State)
+                </td>
+                <td>
+                    @DisplayZip(Model.Zip5, Model.Zip4)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Model.StartDate.ToString("yyyy-MM-dd")">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        <a asp-action="Index" class="btn btn-primary">Back</a>
+    </p>
+</body>
+</html>

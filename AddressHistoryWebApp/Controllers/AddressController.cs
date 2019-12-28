@@ -22,6 +22,30 @@ namespace AddressHistoryWebApp.Controllers
             return View(_repo.GetAddresses());
         }
 
+        // GET: Address
+        public IActionResult All()
+        {
+            return View("List", _repo.GetAddresses());
+        }
+
+        // GET: Address
+        public IActionResult List(string date, bool single)
+        {
+            if (date.Equals("mm/dd/yyyy"))
+            {
+                return BadRequest();
+            }
+
+            DateTime _startdate = DateTime.Parse(date);
+
+            if (single)
+            {
+                return View("Single", _repo.GetAddress(_startdate));
+            }
+
+            return View("List", _repo.GetAddresses(_startdate));
+        }
+
         // GET: Address/Create
         public IActionResult Create()
         {
