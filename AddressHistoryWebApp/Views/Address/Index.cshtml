@@ -19,15 +19,36 @@
             <a asp-controller="Address" asp-action="Delete" class="btn btn-primary">Delete Address</a>
 
         </p>
-        <form asp-controller="Address" asp-action="List">
+    </div>
+    <div>
+        <form asp-controller="Address" asp-action="ListDate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <fieldset>
-                <legend>Query date</legend>
+            <fieldset class="form-group">
+                <legend>Specified date</legend>
                 <div class="form-group">
                     <label for="Date" class="control-label">Date</label>
-                    <input type="text" id="date" name="date" value="mm/dd/yyyy" class="form-control" />
+                    <input type="text" id="date" name="date" value="mm/dd/yyyy" class="form-control col-md-2" />
                 </div>
-                <div class="form-check">
+                <div class="form-group form-check">
+                    <label><input type="radio" name="single" value="true" class="form-check-input" />Single Address</label><br />
+                    <label><input type="radio" name="single" value="false" class="form-check-input" checked />List of Addresses</label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="">
+        <form asp-controller="Address" asp-action="ListCalcDate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <fieldset class="form-group">
+                <legend>Calculated date</legend>
+                <div class="form-group">
+                    <label class="control-label">Number of years to subtract</label>
+                    <input type="text" id="years" name="years" value="" class="form-control col-md-1" />
+                </div>
+                <div class="form-group form-check">
                     <label><input type="radio" name="single" value="true" class="form-check-input" />Single Address</label><br />
                     <label><input type="radio" name="single" value="false" class="form-check-input" checked />List of Addresses</label>
                 </div>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using AddressHistoryDAL;
 using AddressHistoryDAL.Models;
 using AddressHistoryDAL.Repos;
 
@@ -19,7 +20,7 @@ namespace AddressHistoryWebApp.Controllers
         // GET: Address
         public IActionResult Index()
         {
-            return View(_repo.GetAddresses());
+            return View();
         }
 
         // GET: Address
@@ -29,7 +30,7 @@ namespace AddressHistoryWebApp.Controllers
         }
 
         // GET: Address
-        public IActionResult List(string date, bool single)
+        public IActionResult ListDate(string date, bool single)
         {
             if (date.Equals("mm/dd/yyyy"))
             {
@@ -44,6 +45,44 @@ namespace AddressHistoryWebApp.Controllers
             }
 
             return View("List", _repo.GetAddresses(_startdate));
+        }
+
+        // GET: Address
+        public IActionResult ListCalcDate(string years, bool single)
+        {
+            try
+            {
+                bool _success = int.TryParse(years, out int _num);
+                if (_success)
+                {
+                    string _date = DateTime.Now.AddYears(-_num).ToString("MM/dd/yyyy");
+
+                    DateTime _startdate = DateTime.Parse(_date);
+
+                    if (single)
+                    {
+                        return View("Single", _repo.GetAddress(_startdate));
+                    }
+
+                    return View("List", _repo.GetAddresses(_startdate));
+                }
+                else
+                {
+                    throw new Exception("Cannot convert string years to integer.");
+                }
+            }
+            catch (Exception ex)
+            {
+                InputOutput logger = InputOutput.GetInstance();
+
+                ex.Data.Add("Class:", "AddressController");
+                ex.Data.Add("Method:", "ListCalcDate(string years, bool single)");
+                ex.Data.Add("years:", $"\"{years}\"");
+
+                logger.WriteLogFile(ex);
+            }
+
+            return BadRequest();
         }
 
         // GET: Address/Create
