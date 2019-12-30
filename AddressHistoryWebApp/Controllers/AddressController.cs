@@ -29,7 +29,9 @@ namespace AddressHistoryWebApp.Controllers
             return View("List", _repo.GetAddresses());
         }
 
-        // GET: Address
+        // POST: Address/ListDate
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ListDate(string date, bool single)
         {
             try
@@ -62,7 +64,9 @@ namespace AddressHistoryWebApp.Controllers
             return BadRequest();
         }
 
-        // GET: Address
+        // POST: Address/ListCalcDate
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ListCalcDate(string years, bool single)
         {
             try

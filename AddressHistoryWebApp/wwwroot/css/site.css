@@ -54,3 +54,17 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Custom rules */
+
+fieldset {
+    border: 1px solid #000000;
+    padding: 0 10px;
+    width: 60%;
+}
+
+legend {
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+}
