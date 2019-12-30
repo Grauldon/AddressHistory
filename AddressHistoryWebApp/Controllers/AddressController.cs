@@ -32,19 +32,34 @@ namespace AddressHistoryWebApp.Controllers
         // GET: Address
         public IActionResult ListDate(string date, bool single)
         {
-            if (date.Equals("mm/dd/yyyy"))
+            try
             {
-                return BadRequest();
+                if (date != null && !date.Equals("mm/dd/yyyy"))
+                {
+                    DateTime _startdate = DateTime.Parse(date);
+
+                    if (single)
+                    {
+                        return View("Single", _repo.GetAddress(_startdate));
+                    }
+
+                    return View("List", _repo.GetAddresses(_startdate));
+                }
+
+                throw new Exception("Invalid date input.");
+            }
+            catch (Exception ex)
+            {
+                InputOutput logger = InputOutput.GetInstance();
+
+                ex.Data.Add("Class:", "AddressController");
+                ex.Data.Add("Method:", "ListCalcDate(string date, bool single)");
+                ex.Data.Add("years:", $"\"{date}\"");
+
+                logger.WriteLogFile(ex);
             }
 
-            DateTime _startdate = DateTime.Parse(date);
-
-            if (single)
-            {
-                return View("Single", _repo.GetAddress(_startdate));
-            }
-
-            return View("List", _repo.GetAddresses(_startdate));
+            return BadRequest();
         }
 
         // GET: Address
