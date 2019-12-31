@@ -58,7 +58,7 @@ body {
 /* Custom rules */
 
 fieldset {
-    border: 1px solid #000000;
+    border: 1px solid #007bff;
     padding: 0 10px;
     width: 60%;
 }
@@ -67,4 +67,9 @@ legend {
     width: auto;
     padding: 0 10px;
     border-bottom: none;
+}
+
+#addresses {
+    background-color: #fff8e8;
+    color: #007bff;
 }
